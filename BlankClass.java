@@ -21,14 +21,14 @@ public class BlankClass extends GCanvas
 implements ComponentListener{
 	private  ArrayList<ArrayList<Double>> array;
 	private double APPLICATION_WIDTH;
-	
+
 
 	public  BlankClass(){
 		addComponentListener(this);
 
-		
+
 		array = new ArrayList<ArrayList<Double>>();
-		
+
 
 
 	}
@@ -82,7 +82,7 @@ implements ComponentListener{
 		label = new GLabel("");
 		add(label,50,50);
 		for(int i=0; i<array.size(); i++){
-			ArrayList coefficient = array.get(i);
+			ArrayList<Double> coefficient = array.get(i);
 			showGraphFunction(coefficient);
 			drawGraph(coefficient);
 		}
@@ -106,7 +106,6 @@ implements ComponentListener{
 					y += coeff* Math.pow(x, count);
 					--count;
 				}
-				//System.out.println(y);
 				if (y==0){
 					System.out.println(x);
 					GOval oval = new GOval(getWidth()/2 -10 + x*10, getHeight()/2-10, 20, 20);
@@ -118,7 +117,6 @@ implements ComponentListener{
 		} 
 		else {
 			newtonApproximation(coefficient, degree, firstGuess);
-			//System.out.println(fX);
 			if(fX<=tolerance){
 				result+="     "+ n;
 				GOval oval = new GOval(getWidth()/2 -10 + n*10, getHeight()/2-10, 20, 20);
@@ -160,7 +158,7 @@ implements ComponentListener{
 			y += coeff* Math.pow(x, count);
 			--count;
 		}
-		
+
 		return y;
 
 	}
@@ -175,11 +173,11 @@ implements ComponentListener{
 			y+=coeff*Math.pow(x,count-1);
 			--count;
 		}
-		
+
 		return  y;
 
 	}
-	
+
 	public void drawSineFunction(){
 		double x = 0.000;
 		while(true){
@@ -187,19 +185,19 @@ implements ComponentListener{
 			GOval oval = new GOval(0.001, 0.001);
 			oval.setColor(Color.BLUE);
 			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
-            if(oval.getX()>getWidth()) break;
-            x+=0.001;
+			if(oval.getX()>getWidth()) break;
+			x+=0.001;
 		}
-		
-		 x = -0.000;
+
+		x = -0.000;
 		while(true){
 			double y = Math.sin(x);
 			GOval oval = new GOval(0.001, 0.001);
 			oval.setColor(Color.BLUE);
 			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
-            if(oval.getX()<0) break;
-            x-=0.001;
-			
+			if(oval.getX()<0) break;
+			x-=0.001;
+
 		}
 	}
 	public void drawCosineFunction(){
@@ -209,19 +207,19 @@ implements ComponentListener{
 			GOval oval = new GOval(0.001, 0.001);
 			oval.setColor(Color.GREEN);
 			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
-            if(oval.getX()>getWidth()) break;
-            x+=0.001;
+			if(oval.getX()>getWidth()) break;
+			x+=0.001;
 		}
-		
-		 x = -0.000;
+
+		x = -0.000;
 		while(true){
 			double y = Math.cos(x);
 			GOval oval = new GOval(0.001, 0.001);
 			oval.setColor(Color.GREEN);
 			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
-            if(oval.getX()<0) break;
-            x-=0.001;
-			
+			if(oval.getX()<0) break;
+			x-=0.001;
+
 		}
 	}
 	public void drawTanFunction(){
@@ -231,22 +229,45 @@ implements ComponentListener{
 			GOval oval = new GOval(0.001, 0.001);
 			oval.setColor(Color.ORANGE);
 			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
-            if(oval.getX()>getWidth()) break;
-            x+=0.001;
+			if(oval.getX()>getWidth()) break;
+			x+=0.001;
 		}
-		
-		 x = -0.000;
+
+		x = -0.000;
 		while(true){
 			double y = Math.tan(x);
 			GOval oval = new GOval(0.001, 0.001);
 			oval.setColor(Color.ORANGE);
 			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
-            if(oval.getX()<0) break;
-            x-=0.001;
-			
+			if(oval.getX()<0) break;
+			x-=0.001;
+
+		}
+	}
+	public void drawInverseTrig(){
+		double x = 0.000;
+		while(true){
+			double y=Math.sin(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.ORANGE);
+			add(oval, APPLICATION_WIDTH/2+ y*50-oval.getWidth()/2,getHeight()/2-x*50-oval.getWidth()/2);
+			if(oval.getY()>getHeight()|| oval.getY()<0) break;
+			x+=0.001;
+		}
+
+		x = -0.000;
+		while(true){
+			double y = Math.sin(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.ORANGE);
+			add(oval, APPLICATION_WIDTH/2+ y*50-oval.getWidth()/2,getHeight()/2-x*50-oval.getWidth()/2);
+			if(oval.getY()>getHeight()|| oval.getY()<0) break;
+			x-=0.001;
+
 		}
 	}
 	
+
 	public void drawInverse(ArrayList coefficient){
 		int degree = coefficient.size()-1; 
 		double x = 0.000;
@@ -267,29 +288,98 @@ implements ComponentListener{
 			x+=0.001;
 
 		}
+        x =0.000;
+		while(true){
+			double y=0;
+			int count = degree;
+			for (int i=0; i<coefficient.size(); i++){
+				double coeff = (double) coefficient.get(i);
+				y += coeff* Math.pow(x, count);
+				--count;
+			}
 
+			GOval point2 = new GOval(0.0001,0.0001);
+			point2.setColor(Color.MAGENTA);
+			add(point2, APPLICATION_WIDTH/2+ y-point2.getWidth()/2,getHeight()/2- x*10-point2.getWidth()/2);
 
-		
-			x =0.000;
-			while(true){
-				double y=0;
-				int count = degree;
-				for (int i=0; i<coefficient.size(); i++){
-					double coeff = (double) coefficient.get(i);
-					y += coeff* Math.pow(x, count);
-					--count;
-				}
+			if (point2.getX()<0 || point2.getX()>getWidth()) break;
+			x-=0.001;
+		}	
 
-				GOval point2 = new GOval(0.0001,0.0001);
-				point2.setColor(Color.MAGENTA);
-				add(point2, APPLICATION_WIDTH/2+ y-point2.getWidth()/2,getHeight()/2- x*10-point2.getWidth()/2);
-
-				if (point2.getX()<0 || point2.getX()>getWidth()) break;
-				x-=0.001;
-			}	
-		
 	}
 	public void drawGraph(ArrayList coefficient){
+        drawYAxis();
+        drawXAxis();
+        int degree = coefficient.size()-1; 
+		double x = 0.000;
+        while(true){
+			double y=0;
+			int count = degree;
+			for (int i=0; i<coefficient.size(); i++){
+				double coeff = (double) coefficient.get(i);
+				y += coeff* Math.pow(x, count);
+				--count;
+			}
+			GOval point = new GOval(0.0001,0.0001);
+			add(point, APPLICATION_WIDTH/2+ x*10-point.getWidth()/2,getHeight()/2-y-point.getWidth()/2);
+			if (point.getY()<0 || point.getY()>getHeight()) break;
+			x+=0.001;
+		}
+        x =0.000;
+		while(true){
+			double y=0;
+			int count = degree;
+			for (int i=0; i<coefficient.size(); i++){
+				double coeff = (double) coefficient.get(i);
+				y += coeff* Math.pow(x, count);
+				--count;
+			}
+
+			GOval point2 = new GOval(0.0001,0.0001);
+			add(point2, APPLICATION_WIDTH/2+ x*10-point2.getWidth()/2,getHeight()/2- y-point2.getWidth()/2);
+
+			if (point2.getY()<0 || point2.getY()>getHeight()) break;
+			x-=0.001;
+
+		} 
+	}
+	private void drawXAxis(){
+		 GLine xAxis = new GLine(0, getHeight()/2,APPLICATION_WIDTH, getHeight()/2);
+			double count2 = 0;
+			add(xAxis);
+			double width = APPLICATION_WIDTH/30;
+			double xLine = APPLICATION_WIDTH/2;
+			int counter = 0;
+			for (int i=0; i<20; ++i){
+				GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
+				add(line);
+				++counter;
+				if(counter%5==0){
+					GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
+					label.setFont("Helvetica-plain-10");
+					add(label);
+				}
+
+				xLine-=width;
+				count2-=2.5;
+			}
+			xLine = APPLICATION_WIDTH/2;
+			count2 = 0;
+			counter = 0;
+			for (int i=0; i<20; ++i){
+				GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
+				add(line);
+				++counter;
+				if(counter%5==0){
+					GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
+					label.setFont("Helvetica-plain-10");
+					add(label);
+				}
+				count2+=2.5;
+				xLine+=width;
+			}
+	}
+	private void drawYAxis(){
 
 		int count1 = 0;
 		int counter1 = 0;
@@ -325,88 +415,10 @@ implements ComponentListener{
 			yLine-=height;
 			count1+=20;
 		}
-
-
-
-		GLine xAxis = new GLine(0, getHeight()/2,APPLICATION_WIDTH, getHeight()/2);
-		double count2 = 0;
-		add(xAxis);
-		double width = APPLICATION_WIDTH/30;
-		double xLine = APPLICATION_WIDTH/2;
-		int counter = 0;
-		for (int i=0; i<20; ++i){
-			GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
-			add(line);
-			++counter;
-			if(counter%5==0){
-				GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
-				label.setFont("Helvetica-plain-10");
-				add(label);
-			}
-
-			xLine-=width;
-			count2-=2.5;
-		}
-		xLine = APPLICATION_WIDTH/2;
-		count2 = 0;
-		counter = 0;
-		for (int i=0; i<20; ++i){
-			GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
-			add(line);
-			++counter;
-			if(counter%5==0){
-				GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
-				label.setFont("Helvetica-plain-10");
-				add(label);
-			}
-			count2+=2.5;
-			xLine+=width;
-		}
-		int degree = coefficient.size()-1; 
-		double x = 0.000;
-
-		while(true){
-			double y=0;
-			int count = degree;
-			for (int i=0; i<coefficient.size(); i++){
-				double coeff = (double) coefficient.get(i);
-				y += coeff* Math.pow(x, count);
-				--count;
-			}
-
-			GOval point = new GOval(0.0001,0.0001);
-			add(point, APPLICATION_WIDTH/2+ x*10-point.getWidth()/2,getHeight()/2-y-point.getWidth()/2);
-
-			//xPositive.put(APPLICATION_WIDTH/2+ x*10-point.getWidth()/2,getHeight()/2-y-point.getWidth()/2 );
-			if (point.getY()<0 || point.getY()>getHeight()) break;
-
-			x+=0.001;
-
-		}
-
-
-
-		x =0.000;
-		while(true){
-			double y=0;
-			int count = degree;
-			for (int i=0; i<coefficient.size(); i++){
-				double coeff = (double) coefficient.get(i);
-				y += coeff* Math.pow(x, count);
-				--count;
-			}
-
-			GOval point2 = new GOval(0.0001,0.0001);
-			add(point2, APPLICATION_WIDTH/2+ x*10-point2.getWidth()/2,getHeight()/2- y-point2.getWidth()/2);
-
-			if (point2.getY()<0 || point2.getY()>getHeight()) break;
-			x-=0.001;
-			//System.out.println(x);
-		} 
 	}
 
-	private GLine line;
+
 	private GLabel label;
-	
+
 }
 

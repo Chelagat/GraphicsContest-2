@@ -26,7 +26,8 @@ public class GraphicsContest extends Program {
 	private JButton sine;
 	private JButton cosine;
 	private JButton tan;
-	
+	private JButton arcsine;
+
 	public void init(){
 		clear = new JButton("Clear");
 		add(clear, NORTH);
@@ -40,11 +41,14 @@ public class GraphicsContest extends Program {
 		add(cosine, SOUTH);
 		tan = new JButton("Tan(x)");
 		add(tan, SOUTH);
+		arcsine = new JButton("ArcSin(x)");
+		add(arcsine, SOUTH);
+		
 		add(new JLabel("First guess for Newton's Approximation"), NORTH);
 		firstGuess = new DoubleField();
 		add(firstGuess, NORTH);
 		firstGuess.addActionListener(this);
-        addActionListeners();
+		addActionListeners();
 		canvas = new BlankClass();
 		add(canvas);
 		coefficient = new ArrayList<Double>();
@@ -67,12 +71,9 @@ public class GraphicsContest extends Program {
 	}
 
 	private void drawGraph(){
-
-		canvas.addEntry(coefficient);
+        canvas.addEntry(coefficient);
 		canvas.update();
-
-
-	}
+    }
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==clear){
 			canvas.clear();
@@ -90,9 +91,6 @@ public class GraphicsContest extends Program {
 			double x = dialog.readInt("Enter constant: ");
 			coefficient.add(x);
 			drawGraph();
-
-
-
 		} else if(e.getSource()==root){
 			canvas.findRoots(coefficient, firstGuess.getValue());
 		} else if(e.getSource()==inverse){
@@ -103,6 +101,8 @@ public class GraphicsContest extends Program {
 			canvas.drawCosineFunction();
 		} else if(e.getSource()==tan){
 			canvas.drawTanFunction();
+		} else if(e.getSource()==arcsine){
+			canvas.drawInverseTrig();
 		}
 
 	}
