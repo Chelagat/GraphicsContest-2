@@ -202,6 +202,51 @@ implements ComponentListener{
 			
 		}
 	}
+	public void drawCosineFunction(){
+		double x = 0.000;
+		while(true){
+			double y=Math.cos(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.GREEN);
+			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
+            if(oval.getX()>getWidth()) break;
+            x+=0.001;
+		}
+		
+		 x = -0.000;
+		while(true){
+			double y = Math.cos(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.GREEN);
+			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
+            if(oval.getX()<0) break;
+            x-=0.001;
+			
+		}
+	}
+	public void drawTanFunction(){
+		double x = 0.000;
+		while(true){
+			double y=Math.tan(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.ORANGE);
+			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
+            if(oval.getX()>getWidth()) break;
+            x+=0.001;
+		}
+		
+		 x = -0.000;
+		while(true){
+			double y = Math.tan(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.ORANGE);
+			add(oval, APPLICATION_WIDTH/2+ x*50-oval.getWidth()/2,getHeight()/2-y*50-oval.getWidth()/2);
+            if(oval.getX()<0) break;
+            x-=0.001;
+			
+		}
+	}
+	
 	public void drawInverse(ArrayList coefficient){
 		int degree = coefficient.size()-1; 
 		double x = 0.000;
