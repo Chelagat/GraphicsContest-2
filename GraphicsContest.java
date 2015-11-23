@@ -1,17 +1,9 @@
-import java.awt.Graphics;
+
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import acm.graphics.GLine;
-import acm.graphics.GMath;
-import acm.graphics.GOval;
-import acm.program.GraphicsProgram;
 import acm.program.Program;
-import acm.graphics.*;
 import acm.gui.DoubleField;
 import acm.io.IODialog;
 
@@ -26,7 +18,7 @@ public class GraphicsContest extends Program {
 	private JButton sine;
 	private JButton cosine;
 	private JButton tan;
-	private JButton arcsine;
+	
 
 	public void init(){
 		clear = new JButton("Clear");
@@ -41,9 +33,6 @@ public class GraphicsContest extends Program {
 		add(cosine, SOUTH);
 		tan = new JButton("Tan(x)");
 		add(tan, SOUTH);
-		arcsine = new JButton("ArcSin(x)");
-		add(arcsine, SOUTH);
-		
 		add(new JLabel("First guess for Newton's Approximation"), NORTH);
 		firstGuess = new DoubleField();
 		add(firstGuess, NORTH);
@@ -53,7 +42,6 @@ public class GraphicsContest extends Program {
 		add(canvas);
 		coefficient = new ArrayList<Double>();
 		IODialog dialog = getDialog();
-		//dialog.setExceptionOnError(false);
 		degree = dialog.readInt("Enter degree of polynomial:");
 		int count = degree;
 		for (int i = 0; i < degree; i++) {
@@ -93,16 +81,14 @@ public class GraphicsContest extends Program {
 			drawGraph();
 		} else if(e.getSource()==root){
 			canvas.findRoots(coefficient, firstGuess.getValue());
-		} else if(e.getSource()==inverse){
-			canvas.drawInverse(coefficient);
 		} else if(e.getSource()==sine){
 			canvas.drawSineFunction();
 		} else if(e.getSource()==cosine){
 			canvas.drawCosineFunction();
 		} else if(e.getSource()==tan){
 			canvas.drawTanFunction();
-		} else if(e.getSource()==arcsine){
-			canvas.drawInverseTrig();
+		} else if(e.getSource()==inverse){
+			canvas.drawInverse(coefficient);
 		}
 
 	}

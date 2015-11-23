@@ -21,15 +21,15 @@ public class BlankClass extends GCanvas
 implements ComponentListener{
 	private  ArrayList<ArrayList<Double>> array;
 	private double APPLICATION_WIDTH;
+	private GLabel label;
+	private double x1;
+	private double y1;
+	private GLabel root;
 
 
 	public  BlankClass(){
 		addComponentListener(this);
-
-
 		array = new ArrayList<ArrayList<Double>>();
-
-
 
 	}
 	public void addEntry(ArrayList<Double> coefficient) {
@@ -40,13 +40,7 @@ implements ComponentListener{
 		array.clear();
 	}
 
-	public void componentHidden(ComponentEvent e) { }
-	public void componentMoved(ComponentEvent e) { }
-	public void componentResized(ComponentEvent e) { update(); }
-	public void componentShown(ComponentEvent e) { }
-	private double x1;
-	private double y1;
-	private GLabel root;
+	
 
 	private void showGraphFunction(ArrayList<Double>coefficient){
 		String result = "f(x)= ";
@@ -244,34 +238,9 @@ implements ComponentListener{
 
 		}
 	}
-	public void drawInverseTrig(){
-		double x = 0.000;
-		while(true){
-			double y=Math.sin(x);
-			GOval oval = new GOval(0.001, 0.001);
-			oval.setColor(Color.ORANGE);
-			add(oval, APPLICATION_WIDTH/2+ y*50-oval.getWidth()/2,getHeight()/2-x*50-oval.getWidth()/2);
-			if(oval.getY()>getHeight()|| oval.getY()<0) break;
-			x+=0.001;
-		}
-
-		x = -0.000;
-		while(true){
-			double y = Math.sin(x);
-			GOval oval = new GOval(0.001, 0.001);
-			oval.setColor(Color.ORANGE);
-			add(oval, APPLICATION_WIDTH/2+ y*50-oval.getWidth()/2,getHeight()/2-x*50-oval.getWidth()/2);
-			if(oval.getY()>getHeight()|| oval.getY()<0) break;
-			x-=0.001;
-
-		}
-	}
-	
-
 	public void drawInverse(ArrayList coefficient){
 		int degree = coefficient.size()-1; 
 		double x = 0.000;
-
 		while(true){
 			double y=0;
 			int count = degree;
@@ -280,15 +249,13 @@ implements ComponentListener{
 				y += coeff* Math.pow(x, count);
 				--count;
 			}
-
 			GOval point = new GOval(0.0001,0.0001);
-			point.setColor(Color.MAGENTA);
-			add(point, APPLICATION_WIDTH/2+ y-point.getWidth()/2,getHeight()/2-x*10-point.getWidth()/2);
+			point.setColor(Color.RED);
+			add(point, APPLICATION_WIDTH/2+ y*10-point.getWidth()/2,getHeight()/2-x-point.getWidth()/2);
 			if (point.getX()<0 || point.getX()>getWidth()) break;
 			x+=0.001;
-
 		}
-        x =0.000;
+		x =0.000;
 		while(true){
 			double y=0;
 			int count = degree;
@@ -299,20 +266,20 @@ implements ComponentListener{
 			}
 
 			GOval point2 = new GOval(0.0001,0.0001);
-			point2.setColor(Color.MAGENTA);
-			add(point2, APPLICATION_WIDTH/2+ y-point2.getWidth()/2,getHeight()/2- x*10-point2.getWidth()/2);
-
-			if (point2.getX()<0 || point2.getX()>getWidth()) break;
+			point2.setColor(Color.RED);
+			add(point2, APPLICATION_WIDTH/2+ y*10-point2.getWidth()/2,getHeight()/2- x-point2.getWidth()/2);
+            if (point2.getX()<0 || point2.getX()>getWidth()) break;
 			x-=0.001;
-		}	
 
+		} 
 	}
+
 	public void drawGraph(ArrayList coefficient){
-        drawYAxis();
-        drawXAxis();
-        int degree = coefficient.size()-1; 
+		drawYAxis();
+		drawXAxis();
+		int degree = coefficient.size()-1; 
 		double x = 0.000;
-        while(true){
+		while(true){
 			double y=0;
 			int count = degree;
 			for (int i=0; i<coefficient.size(); i++){
@@ -325,7 +292,7 @@ implements ComponentListener{
 			if (point.getY()<0 || point.getY()>getHeight()) break;
 			x+=0.001;
 		}
-        x =0.000;
+		x =0.000;
 		while(true){
 			double y=0;
 			int count = degree;
@@ -344,40 +311,40 @@ implements ComponentListener{
 		} 
 	}
 	private void drawXAxis(){
-		 GLine xAxis = new GLine(0, getHeight()/2,APPLICATION_WIDTH, getHeight()/2);
-			double count2 = 0;
-			add(xAxis);
-			double width = APPLICATION_WIDTH/30;
-			double xLine = APPLICATION_WIDTH/2;
-			int counter = 0;
-			for (int i=0; i<20; ++i){
-				GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
-				add(line);
-				++counter;
-				if(counter%5==0){
-					GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
-					label.setFont("Helvetica-plain-10");
-					add(label);
-				}
+		GLine xAxis = new GLine(0, getHeight()/2,APPLICATION_WIDTH, getHeight()/2);
+		double count2 = 0;
+		add(xAxis);
+		double width = APPLICATION_WIDTH/30;
+		double xLine = APPLICATION_WIDTH/2;
+		int counter = 0;
+		for (int i=0; i<20; ++i){
+			GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
+			add(line);
+			++counter;
+			if(counter%5==0){
+				GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
+				label.setFont("Helvetica-plain-10");
+				add(label);
+			}
 
-				xLine-=width;
-				count2-=2.5;
+			xLine-=width;
+			count2-=2.5;
+		}
+		xLine = APPLICATION_WIDTH/2;
+		count2 = 0;
+		counter = 0;
+		for (int i=0; i<20; ++i){
+			GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
+			add(line);
+			++counter;
+			if(counter%5==0){
+				GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
+				label.setFont("Helvetica-plain-10");
+				add(label);
 			}
-			xLine = APPLICATION_WIDTH/2;
-			count2 = 0;
-			counter = 0;
-			for (int i=0; i<20; ++i){
-				GLine line = new GLine(xLine,getHeight()/2-5, xLine, getHeight()/2+5);
-				add(line);
-				++counter;
-				if(counter%5==0){
-					GLabel label = new GLabel(""+count2, xLine, getHeight()/2+15);
-					label.setFont("Helvetica-plain-10");
-					add(label);
-				}
-				count2+=2.5;
-				xLine+=width;
-			}
+			count2+=2.5;
+			xLine+=width;
+		}
 	}
 	private void drawYAxis(){
 
@@ -416,9 +383,14 @@ implements ComponentListener{
 			count1+=20;
 		}
 	}
+     
+	public void componentHidden(ComponentEvent e) { }
+	public void componentMoved(ComponentEvent e) { }
+	public void componentResized(ComponentEvent e) { update(); }
+	public void componentShown(ComponentEvent e) { }
+	
 
 
-	private GLabel label;
 
 }
 
