@@ -18,7 +18,7 @@ import acm.graphics.*;
 
 
 public class BlankClass extends GCanvas
-implements ComponentListener, MouseMotionListener{
+implements ComponentListener{
 	private  ArrayList<ArrayList<Double>> array;
 	private double APPLICATION_WIDTH;
 	
@@ -26,7 +26,7 @@ implements ComponentListener, MouseMotionListener{
 	public  BlankClass(){
 		addComponentListener(this);
 
-		addMouseMotionListener(this);
+		
 		array = new ArrayList<ArrayList<Double>>();
 		
 
@@ -339,22 +339,6 @@ implements ComponentListener, MouseMotionListener{
 
 	private GLine line;
 	private GLabel label;
-	//private GRect rect;
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		double x = e.getX();
-		//		if(xPositive.get(x)!=null){
-		//		label.setLabel(""+e.getX());
-		//		}
-		//		label.setLabel(""+xPositive.size());
-		//		System.out.println(xPositive.get(x));
-		//		}
-	}
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		//		rect = new GRect(50,50,100,100);
-		//		add(rect);
-		//		}
-	}
+	
 }
 
