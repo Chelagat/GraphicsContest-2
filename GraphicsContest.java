@@ -23,6 +23,7 @@ public class GraphicsContest extends Program {
 	private int degree;
 	private JButton inverse;
 	private ArrayList<Double> coefficient;
+	private JButton sine;
 	public void init(){
 		clear = new JButton("Clear");
 		add(clear, NORTH);
@@ -30,6 +31,8 @@ public class GraphicsContest extends Program {
 		add(root,NORTH);
 		inverse = new JButton("Inverse");
 		add(inverse, NORTH);
+		sine = new JButton("Sin(x)");
+		add(sine, SOUTH);
 		add(new JLabel("First guess for Newton's Approximation"), NORTH);
 		firstGuess = new DoubleField();
 		add(firstGuess, NORTH);
@@ -88,6 +91,8 @@ public class GraphicsContest extends Program {
 			canvas.findRoots(coefficient, firstGuess.getValue());
 		} else if(e.getSource()==inverse){
 			canvas.drawInverse(coefficient);
+		} else if(e.getSource()==sine){
+			canvas.drawSineFunction();
 		}
 
 	}

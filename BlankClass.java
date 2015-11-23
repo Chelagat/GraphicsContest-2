@@ -179,6 +179,29 @@ implements ComponentListener{
 		return  y;
 
 	}
+	
+	public void drawSineFunction(){
+		double x = 0.000;
+		while(true){
+			double y=Math.sin(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.BLUE);
+			add(oval, APPLICATION_WIDTH/2+ x*10-oval.getWidth()/2,getHeight()/2-y-oval.getWidth()/2);
+            if(oval.getX()>getWidth()) break;
+            x+=0.001;
+		}
+		
+		 x = -0.000;
+		while(true){
+			double y = Math.sin(x);
+			GOval oval = new GOval(0.001, 0.001);
+			oval.setColor(Color.BLUE);
+			add(oval, APPLICATION_WIDTH/2+ x*10-oval.getWidth()/2,getHeight()/2-y-oval.getWidth()/2);
+            if(oval.getX()<0) break;
+            x-=0.001;
+			
+		}
+	}
 	public void drawInverse(ArrayList coefficient){
 		int degree = coefficient.size()-1; 
 		double x = 0.000;
