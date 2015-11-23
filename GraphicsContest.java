@@ -1,4 +1,20 @@
-
+/*
+ * File: GraphicsContest
+ * Name: Norah Borus
+ * Section Leader: John Merriman Sholar
+ * GRAPHING CALCULATOR
+ * The program simulates a graphing calculator for polynomials and 
+ * basic trigonometric functions. The user is asked, via IO dialog for the information
+ * regarding the polynomial function to be represented graphically(i.e. the degree,
+ * and coefficients, and constant). This information is stored in an arraylist and passed onto a 
+ * GCanvas, where the graph is drawn.
+ * The inverse function of the graph can be drawn.
+ * The roots of the function can be gotten. If the roots are not whole numbers, they are approximated using 
+ * Newton's approximation, taking in a first guess(x1) from the user. The roots are circled if they are 
+ * found. If there are no roots, or if the user picks a bad first guess, they are informed that there are no roots found.
+ * Sin(x), Cos(x) and tan(x) functions are options that the user can click on if he/she wants
+ * to see a graphical representation.
+ */
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -34,7 +50,7 @@ public class GraphicsContest extends Program {
 		tan = new JButton("Tan(x)");
 		add(tan, SOUTH);
 		add(new JLabel("First guess for Newton's Approximation"), NORTH);
-		firstGuess = new DoubleField();
+		firstGuess = new DoubleField(1000);
 		add(firstGuess, NORTH);
 		firstGuess.addActionListener(this);
 		addActionListeners();
@@ -79,7 +95,7 @@ public class GraphicsContest extends Program {
 			double x = dialog.readInt("Enter constant: ");
 			coefficient.add(x);
 			drawGraph();
-		} else if(e.getSource()==root){
+		} else if(e.getSource()==root || e.getSource()==firstGuess){
 			canvas.findRoots(coefficient, firstGuess.getValue());
 		} else if(e.getSource()==sine){
 			canvas.drawSineFunction();

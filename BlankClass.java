@@ -1,40 +1,38 @@
+/*
+ * This class is used to draw the graphs.
+ * The curved lines are drawn using small GOvals as points of the graph.
+ */
+
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-
 import acm.graphics.GLine;
-import acm.graphics.GMath;
 import acm.graphics.GOval;
-
 import acm.graphics.*;
-
-
 
 public class BlankClass extends GCanvas
 implements ComponentListener{
 	private  ArrayList<ArrayList<Double>> array;
 	private double APPLICATION_WIDTH;
 	private GLabel label;
-	private double x1;
-	private double y1;
 	private GLabel root;
+	private double tolerance = 0.0000000001;
+	private int maxCount = 200;
+	private double x2;
+	private double n;
+	private double fX;
 
 
 	public  BlankClass(){
 		addComponentListener(this);
 		array = new ArrayList<ArrayList<Double>>();
-
-	}
+   }
+	
 	public void addEntry(ArrayList<Double> coefficient) {
 		array.add(coefficient);
 	}
+	
 	public void clear(){
 		removeAll();
 		array.clear();
@@ -66,13 +64,13 @@ implements ComponentListener{
 			--degree;
 		}
 		GLabel function = new GLabel(result,0, getHeight()-30);
+		function.setFont("Helvetical-bold-15");
 		add(function);
 	}
 
 	public void update(){
 		removeAll();
-
-		APPLICATION_WIDTH = getWidth();
+        APPLICATION_WIDTH = getWidth();
 		label = new GLabel("");
 		add(label,50,50);
 		for(int i=0; i<array.size(); i++){
@@ -88,7 +86,7 @@ implements ComponentListener{
 		root = new GLabel("", 0,100);
 		add(root);
 		int degree = coefficient.size()-1; 
-		if(firstGuess==0){
+		if(firstGuess==1000){
 
 
 			int count = degree;
@@ -126,11 +124,7 @@ implements ComponentListener{
 
 
 
-	private double tolerance = 0.0000000001;
-	private int maxCount = 200;
-	private double x2;
-	private double n;
-	private double fX;
+	
 	private void newtonApproximation(ArrayList<Double> coefficient, int degree, double x){
 		n = x;
 		fX = getY(coefficient, n, degree);
