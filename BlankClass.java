@@ -251,7 +251,7 @@ implements ComponentListener{
 			}
 			GOval point = new GOval(0.0001,0.0001);
 			point.setColor(Color.RED);
-			add(point, APPLICATION_WIDTH/2+ y*10-point.getWidth()/2,getHeight()/2-x-point.getWidth()/2);
+			add(point, APPLICATION_WIDTH/2+ y-point.getWidth()/2,getHeight()/2-x*10-point.getWidth()/2);
 			if (point.getX()<0 || point.getX()>getWidth()) break;
 			x+=0.001;
 		}
@@ -267,7 +267,7 @@ implements ComponentListener{
 
 			GOval point2 = new GOval(0.0001,0.0001);
 			point2.setColor(Color.RED);
-			add(point2, APPLICATION_WIDTH/2+ y*10-point2.getWidth()/2,getHeight()/2- x-point2.getWidth()/2);
+			add(point2, APPLICATION_WIDTH/2+ y-point2.getWidth()/2,getHeight()/2- x*10-point2.getWidth()/2);
             if (point2.getX()<0 || point2.getX()>getWidth()) break;
 			x-=0.001;
 
