@@ -27,18 +27,18 @@ implements ComponentListener{
 	public  BlankClass(){
 		addComponentListener(this);
 		array = new ArrayList<ArrayList<Double>>();
-   }
-	
+	}
+
 	public void addEntry(ArrayList<Double> coefficient) {
 		array.add(coefficient);
 	}
-	
+
 	public void clear(){
 		removeAll();
 		array.clear();
 	}
 
-	
+
 
 	private void showGraphFunction(ArrayList<Double>coefficient){
 		String result = "f(x)= ";
@@ -70,7 +70,7 @@ implements ComponentListener{
 
 	public void update(){
 		removeAll();
-        APPLICATION_WIDTH = getWidth();
+		APPLICATION_WIDTH = getWidth();
 		label = new GLabel("");
 		add(label,50,50);
 		for(int i=0; i<array.size(); i++){
@@ -87,8 +87,6 @@ implements ComponentListener{
 		add(root);
 		int degree = coefficient.size()-1; 
 		if(firstGuess==1000){
-
-
 			int count = degree;
 			for(int x=-40;x<40; x+=1){
 				count = degree;
@@ -121,10 +119,6 @@ implements ComponentListener{
 		}
 	}
 
-
-
-
-	
 	private void newtonApproximation(ArrayList<Double> coefficient, int degree, double x){
 		n = x;
 		fX = getY(coefficient, n, degree);
@@ -146,8 +140,7 @@ implements ComponentListener{
 			y += coeff* Math.pow(x, count);
 			--count;
 		}
-
-		return y;
+       return y;
 
 	}
 
@@ -262,7 +255,7 @@ implements ComponentListener{
 			GOval point2 = new GOval(0.0001,0.0001);
 			point2.setColor(Color.RED);
 			add(point2, APPLICATION_WIDTH/2+ y-point2.getWidth()/2,getHeight()/2- x*10-point2.getWidth()/2);
-            if (point2.getX()<0 || point2.getX()>getWidth()) break;
+			if (point2.getX()<0 || point2.getX()>getWidth()) break;
 			x-=0.001;
 
 		} 
@@ -377,12 +370,12 @@ implements ComponentListener{
 			count1+=20;
 		}
 	}
-     
+
 	public void componentHidden(ComponentEvent e) { }
 	public void componentMoved(ComponentEvent e) { }
 	public void componentResized(ComponentEvent e) { update(); }
 	public void componentShown(ComponentEvent e) { }
-	
+
 
 
 
